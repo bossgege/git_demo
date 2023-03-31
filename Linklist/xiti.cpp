@@ -550,34 +550,63 @@ bool judge_duicheng(node* head)
  
 }
 
+//18
+void C_cicrellist(Linklist *L)
+{
+      (*L) = new Lnode ;
+       (*L)->next =(*L);
+      Linklist tial;
+      tial = (*L);
+      int nums;
+      cout<< "input nums" <<endl;
+      cin >> nums;
+      for (size_t i = 0; i < nums; i++)
+      {
+          int date;
+          cin >>date;
+          if(i==0)
+          {
+            (*L)->date =date;  
+          }
+          else{
+              Linklist p =new Lnode;
+              p->date =date;
+              tial->next =p;
+              p->next = *L;
+              tial =p;
+          }
+      }
+        tial->next =(*L);
+}
+
+void Circlelist_insert(Linklist *L1 ,Linklist *L2)
+{
+      Linklist p = (*L1);
+      while (p->next!=(*L1))  // 找到 L1的最后一个节点
+      {
+       p=p->next;
+      }
+
+      Linklist q = (*L2);
+      while (q->next!=(*L2)) // 找到 L2的最后一个节点
+      {
+       q=q->next;
+      }
+      p->next =(*L2);   // 连接
+      q->next =(*L1);  
+
+
+}
 
 int main(int argc, char const *argv[])
 {
     Linklist L1;
     Linklist L2;
     node* head;
-   
-     //create_deltete_x(&L);
-    // deltete_x( &L,3);
-    // cout <<'\n';
-    // 
-    // cLinkList_Head( &L1);
-    // cLinkList_Head( &L2);
-  //   //delete_min( &head);
-  //  // deltete_preate_x( &head, 3);
-  //  // delete_part(& head ,1 ,5);
-  // Linklist L= serch_same_node(L1,L2);
-    //delete_min1( &L1);
-    //divide_list( L1);
-    //divide_list1( L1);
-   //print_Linklist(L1);
-   // prints(head);
-  // cout << 1%2;
-   Create_Circlelist(&head);
-   cout << judge_duicheng(head);
-    //cout << head->pre->date << head->next->date;
-
-   //cout<<kmp_list( L1 , L2);
+    C_cicrellist( &L1);
+     C_cicrellist( &L2);
+     Circlelist_insert( &L1 ,&L2);
+   print_Linklist(L1);
   // prints(head);
    return 0;
 
