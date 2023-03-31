@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "sqlist_test.h": "c",
+        "linklist.h": "c",
+        "linklsit_circle.h": "c",
+        "d_linklist.h": "c",
+        "d_linklist_circle.h": "c",
+        "iostream": "cpp",
+        "linklist_sort.h": "c"
+    }
+}
