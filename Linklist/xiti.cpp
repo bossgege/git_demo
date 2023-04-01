@@ -598,15 +598,66 @@ void Circlelist_insert(Linklist *L1 ,Linklist *L2)
 
 }
 
+// 19
+void  create_list_c(Linklist *head)
+{ 
+   (*head) = new Lnode;
+   (*head)->next =(*head);
+   Linklist tail =(*head);
+
+   int nums ;
+   cin >>nums;
+    for (size_t i = 0; i < nums; i++)
+    {
+        int date;
+        cin >>date;
+        Linklist p =new Lnode;
+        p->date=date;
+        p->next =tail;
+        tail->next =p;
+        tail =p;
+    }
+    tail->next =(*head);
+}
+
+
+void delete_min_c(Linklist *head)
+{
+   Linklist min;
+  Linklist premin;
+  Linklist temp;
+  premin = (*head);
+  min=(*head)->next;
+  while ((*head)->next !=(*head)) // 控制轮数直到结点全部释放为止
+  {
+      premin = (*head);
+      min=(*head)->next; // 假定第一结点为最小值
+      Linklist temp;
+      while (min->next!=(*head))
+      {
+           if(min->next->date <min->date) // 每次那当前的最小值与下一个进行比较
+           {
+             premin =min; // 更新最小值的前一个结点
+           }
+            min=min->next;
+      }
+       cout << premin->next->date <<endl;
+       temp = premin->next; //保存当前最小值
+       premin->next = temp->next ; // 防止断链
+       free(temp);
+  }
+  free (head);   
+
+}
+
+
 int main(int argc, char const *argv[])
 {
     Linklist L1;
     Linklist L2;
     node* head;
-    C_cicrellist( &L1);
-     C_cicrellist( &L2);
-     Circlelist_insert( &L1 ,&L2);
-   print_Linklist(L1);
+     create_list_c(&L1);
+     delete_min_c(&L1);
   // prints(head);
    return 0;
 
