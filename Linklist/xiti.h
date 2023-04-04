@@ -3,7 +3,7 @@
 
 #include<iostream>
 using namespace std;
-
+  #include <string.h>
 struct Lnode
 {
     int date;
@@ -15,6 +15,13 @@ struct node
     int date;
     struct node* next;
     struct node* pre;
+};
+struct Node
+{
+    int date;
+    struct Node * next;
+    struct Node *pre;
+    int fre=0;
 };
 
 

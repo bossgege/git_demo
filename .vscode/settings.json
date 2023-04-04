@@ -8,6 +8,7 @@
         "iostream": "cpp",
         "linklist_sort.h": "c",
         "new": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "ostream": "cpp"
     }
 }

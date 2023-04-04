@@ -216,7 +216,7 @@ void delete_min(Linklist *head)
    mpre->next =min->next; // 防止断链
    free(min);
 }
-// 5
+// 8/23
 
 Linklist serch_same_node(Linklist L1 ,Linklist L2)
 {
@@ -650,15 +650,282 @@ void delete_min_c(Linklist *head)
 
 }
 
+void create_d_list(Node** head)
+{
+  cout << "input nums"<<endl;
+  int nums ;
+  cin >>nums;
+   (*head)->next=(*head)->pre =NULL;
+   Node* tail=(*head);
+  for (size_t i = 0; i < nums; i++)
+  {
+      int date;
+      cin >>date;
+      if(i==0)
+      {
+        Node* p = new Node;
+        p->date =date;  
+        p->pre =p->next =NULL;
+        (*head)->next =p;
+        p->pre =(*head);
+        tail =p;
+      }
+      else{
+          
+        Node* p = new Node;
+        p->date =date;  
+        p->pre =p->next =NULL;
+        tail->next =p;
+        p->pre =tail;
+        tail =p;
+      }
+  }
+  tail->next =NULL;
+
+}
+//20
+void prints(Node* head)
+{ 
+  Node*  q = head->next;   // 要创建工作结点
+  while (q)
+    {
+     
+      cout << q->date <<'\t';
+      q=q->next;
+    }
+ 
+}
+
+void Locate(Node** head , int x)
+{
+  Node* p = (*head)->next;
+  while (p!=NULL && p->date !=x) // 找x 的值
+  {
+   p=p->next;
+  }
+  if(!p){cout <<"结点不存在"; return;}
+  else{
+      cout << "访问 p结点:" << p->date<<endl;
+       p->fre ++;
+
+      Node* q = p->pre; 
+      p->next->pre=p->pre;
+      p->pre->next=p->next; // 将p 结点拿下来
+
+      while (q !=(*head) && q->fre <=p->fre) // 查找到要插入的结点
+      {
+        q=q->pre;
+      }
+
+      p->next =q->next;
+      q->next->pre=p;
+      q->next=p;
+      p->pre=q; // 插入节点
+
+  }
+
+}
+void  fre_list(Node** head,int x)
+{
+  Node* p =(*head)->next;
+  while (p!=NULL && p->date !=x)
+  {
+    p=p->next;
+  }
+  p->fre ++;
+  cout << "当前结点的频域"<<p->fre<<endl;
+
+}
+void print_fre(Node* head)
+{
+   Node* p =head->next;
+   while (p)
+   {
+    cout << "当前结点的数据:" <<p->date <<"频域："<<p->fre<<endl;
+    p=p->next;
+   }
+   
+}
+
+//21
+void  create_c(Lnode ** L)
+{
+  (*L) = new Lnode;
+  (*L)->next =NULL;
+  
+  cout<< "input nums"<<endl;
+  int nums;
+  cin>>nums;
+  Lnode* tail;
+  tail=(*L);
+  Lnode *q;
+  for (size_t i = 0; i < nums; i++)
+  {
+      int date ;
+      cin >> date;
+      if(i==0)
+      {
+        Lnode * p =new Lnode;
+        p->next =NULL;
+        p->date=date;
+        (*L)=p;
+        tail=(*L);
+      }
+      else{
+         Lnode * p =new Lnode;
+        p->next =NULL;
+        p->date=date;
+        tail->next =p;
+        tail =p;     
+      }
+      if(i==2) q =tail;
+  }
+  tail->next =q;
+}
+ bool is_cicle(Lnode* L)
+ {
+    Lnode *low;
+    Lnode *fast;
+    low=L;
+    fast =L->next;
+    while (fast !=NULL && low!=NULL)
+    {
+       low =low->next;
+       fast=fast->next->next;
+       if(fast ==low)return true;
+    }
+    return false;
+ }
+
+//22
+void  create_c1(Lnode ** L)
+{
+  (*L) = new Lnode;
+  (*L)->next =NULL;
+  
+  cout<< "input nums"<<endl;
+  int nums;
+  cin>>nums;
+  Lnode* tail;
+  tail=(*L);
+  Lnode *q;
+  for (size_t i = 0; i < nums; i++)
+  {
+      int date ;
+      cin >> date;
+      if(i==0)
+      {
+        Lnode * p =new Lnode;
+        p->next =NULL;
+        p->date=date;
+        (*L)=p;
+        tail=(*L);
+      }
+      else{
+         Lnode * p =new Lnode;
+        p->next =NULL;
+        p->date=date;
+        tail->next =p;
+        tail =p;     
+      }
+      
+  }
+  tail->next =NULL;
+}
+
+void get_pos(Lnode *L,int k)
+{
+  Lnode * fast;
+  Lnode *slow;
+  fast =  L; 
+  slow =L;
+  while (k--)
+  {
+    slow=slow->next;
+  }
+  while (slow)
+  {
+    fast=fast->next;
+    slow =slow->next;
+  }
+  cout << "倒数第K个结点的值:"<<fast->date<<endl;
+
+
+
+}
+
+//23
+void Create_Linklist(Lnode** head) //  等价于 Linklist head
+{
+    Lnode *p;  // 头插法创建  p为工作指针
+     int nums;
+    printf("input create nums\n");
+    scanf("%d",&nums);
+    Lnode *tail; // 创建尾结点 ，不是为指针
+     tail=*head;
+    for (size_t i = 0; i < nums; i++)  // 尾插法
+    {
+        int date;
+        scanf("%d",&date);
+        p = (Lnode*)malloc(sizeof(Lnode));
+        p->date=date;
+        p->next = NULL;
+        tail->next = p;
+        tail=p;
+       
+    } 
+    tail->next =NULL;
+}
+
+void  delete_re(Lnode**L,int n) // 删除重复元素利用数组来进行操作，以时间换空间
+{
+  int* arr = new int[n+1];
+  memset(arr,0,n*sizeof(int)); // 开辟一个数组大小为n 的数组 ，L中的数据不会大于n
+  Lnode* p =(*L)->next;
+  Lnode *pre =(*L);
+  while(p)
+  {
+   
+    if(arr[p->date]==0)   // 如果出现了 就将这个下标的值变为1 
+    {
+     arr[p->date]=1;
+    }
+    else if(arr[p->date]==1)
+    {
+       Lnode *temp =p->next;
+       pre->next =p->next;
+       free(p);
+       p=temp;   
+    }
+    pre=p;
+    p=p->next;
+  }
+}
+void print_Linklist1(Lnode* head)
+{
+  Lnode* q =head->next;
+  while (q)
+  {
+ cout <<q->date;
+  q=q->next;
+  }
+  
+}
 
 int main(int argc, char const *argv[])
 {
     Linklist L1;
     Linklist L2;
-    node* head;
-     create_list_c(&L1);
-     delete_min_c(&L1);
+    Lnode *head;
+   // Node* head;
+   // create_c(&L);
+   // print_Linklist(L);
+   // cout<< is_cicle(L);
   // prints(head);
+ 
+ Create_Linklist(&head);
+ delete_re(&head,5);
+   print_Linklist1(head);
    return 0;
 
 }
