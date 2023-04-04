@@ -7,6 +7,7 @@
         "d_linklist_circle.h": "c",
         "iostream": "cpp",
         "linklist_sort.h": "c",
-        "new": "cpp"
+        "new": "cpp",
+        "iosfwd": "cpp"
     }
 }
