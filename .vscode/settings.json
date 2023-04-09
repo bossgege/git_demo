@@ -9,6 +9,9 @@
         "linklist_sort.h": "c",
         "new": "cpp",
         "iosfwd": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "*.tcc": "cpp",
+        "limits": "cpp",
+        "type_traits": "cpp"
     }
 }

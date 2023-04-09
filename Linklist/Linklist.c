@@ -26,7 +26,7 @@ void Create_Linklist(Linklist* head) //  等价于 Linklist head
     // }
    Lnode *tail= (Lnode*)malloc(sizeof(Lnode));  // 创建尾结点 ，不是为指针
           tail->next = NULL;  
-    *head = tail;
+      tail=*head;
     for (size_t i = 0; i < nums; i++)  // 尾插法
     {
         ElemType date;

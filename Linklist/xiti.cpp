@@ -854,7 +854,7 @@ void get_pos(Lnode *L,int k)
 
 }
 
-//23
+//24
 void Create_Linklist(Lnode** head) //  等价于 Linklist head
 {
     Lnode *p;  // 头插法创建  p为工作指针
@@ -911,21 +911,86 @@ void print_Linklist1(Lnode* head)
   }
   
 }
+//25
+void Create_Linklist2(Lnode** L) //  等价于 Linklist head
+{
+    Lnode *p;  // 头插法创建  p为工作指针
+     int nums;
+    printf("input create nums\n");
+    scanf("%d",&nums);
+    Lnode *tail; // 创建尾结点 ，不是为指针
+     tail=*L;
+    for (size_t i = 0; i < nums; i++)  // 尾插法
+    {
+        int date;
+        scanf("%d",&date);
+        p = (Lnode*)malloc(sizeof(Lnode));
+        p->date=date;
+        p->next = NULL;
+        if(i==0)
+        {
+           (*L)=p;
+           tail=p;
+        }
+        else{
+           tail->next = p;
+           tail=p;
+        } 
+    } 
+    tail->next =NULL;
+}
+void sort_list(Lnode **L)
+{
+  Lnode* slow=(*L);
+  Lnode* fast=(*L)->next;
+
+  while (fast->next!=NULL)  // 找到中间结点
+  {
+    fast=fast->next->next;
+    slow =slow->next;
+  }
+  Lnode *q = slow->next;
+  slow->next =NULL;
+  while (q)  //  后面半段的链表进行逆置
+  {
+     Lnode* p =q->next;
+     q->next =slow->next;
+     slow->next =q;
+     q=p;
+  }
+  
+    
+   
+
+
+
+}
+void print_L(Lnode* L)
+{
+  Lnode* p = L;
+  while (p)
+  {
+    cout << p->date <<" ";
+    p=p->next;
+  }
+  
+}
+
 
 int main(int argc, char const *argv[])
 {
     Linklist L1;
-    Linklist L2;
-    Lnode *head;
+   // Linklist L;
+    Lnode *L;
    // Node* head;
    // create_c(&L);
    // print_Linklist(L);
    // cout<< is_cicle(L);
   // prints(head);
  
- Create_Linklist(&head);
- delete_re(&head,5);
-   print_Linklist1(head);
+  Create_Linklist2(&L);
+ sort_list(&L);
+  print_L(L);
    return 0;
 
 }
